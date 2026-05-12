@@ -2,4 +2,3 @@
 __pycache__/
 *.csv
 .DS_Store
-gpt2_model/*.safetensors
