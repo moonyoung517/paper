@@ -1,0 +1,202 @@
+{
+  "scenario": "two_domain",
+  "use_llm": false,
+  "sequence": [
+    "smd",
+    "msl",
+    "smd"
+  ],
+  "target_dim": 55,
+  "num_groups": 1,
+  "oracle_config": {
+    "reset_each_domain": true,
+    "warm_start": false,
+    "oracle_inner_steps": 3,
+    "oracle_outer_steps": 6,
+    "oracle_max_train_windows": 64
+  },
+  "global_auroc": {
+    "freeze": 0.8126488983758683,
+    "ours": 0.8234457286322173,
+    "sda": 0.8070958929647494,
+    "oracle": 0.7609116632858334
+  },
+  "per_domain_auroc": {
+    "freeze": {
+      "msl": 0.8017423420487139
+    },
+    "ours": {
+      "msl": 0.8000833415304598
+    },
+    "sda": {
+      "msl": 0.7190908383531558
+    },
+    "oracle": {
+      "msl": 0.7794363704787954
+    }
+  },
+  "visit_auroc": {
+    "freeze": [
+      {
+        "domain": "smd",
+        "visit": 1,
+        "start": 0,
+        "end": 5000,
+        "auroc": null
+      },
+      {
+        "domain": "msl",
+        "visit": 1,
+        "start": 5000,
+        "end": 10000,
+        "auroc": 0.8017423420487139
+      },
+      {
+        "domain": "smd",
+        "visit": 2,
+        "start": 10000,
+        "end": 15000,
+        "auroc": null
+      }
+    ],
+    "ours": [
+      {
+        "domain": "smd",
+        "visit": 1,
+        "start": 0,
+        "end": 5000,
+        "auroc": null
+      },
+      {
+        "domain": "msl",
+        "visit": 1,
+        "start": 5000,
+        "end": 10000,
+        "auroc": 0.8000833415304598
+      },
+      {
+        "domain": "smd",
+        "visit": 2,
+        "start": 10000,
+        "end": 15000,
+        "auroc": null
+      }
+    ],
+    "sda": [
+      {
+        "domain": "smd",
+        "visit": 1,
+        "start": 0,
+        "end": 5000,
+        "auroc": null
+      },
+      {
+        "domain": "msl",
+        "visit": 1,
+        "start": 5000,
+        "end": 10000,
+        "auroc": 0.7190908383531558
+      },
+      {
+        "domain": "smd",
+        "visit": 2,
+        "start": 10000,
+        "end": 15000,
+        "auroc": null
+      }
+    ],
+    "oracle": [
+      {
+        "domain": "smd",
+        "visit": 1,
+        "start": 0,
+        "end": 5000,
+        "auroc": null
+      },
+      {
+        "domain": "msl",
+        "visit": 1,
+        "start": 5000,
+        "end": 10000,
+        "auroc": 0.7794363704787954
+      },
+      {
+        "domain": "smd",
+        "visit": 2,
+        "start": 10000,
+        "end": 15000,
+        "auroc": null
+      }
+    ]
+  },
+  "robustness": {
+    "freeze": {
+      "worst_case_auroc": 0.8017423420487139,
+      "best_case_auroc": 0.8017423420487139,
+      "range": 0.0,
+      "collapse_threshold": 0.55,
+      "collapse_count": 0,
+      "below_random_count": 0
+    },
+    "ours": {
+      "worst_case_auroc": 0.8000833415304598,
+      "best_case_auroc": 0.8000833415304598,
+      "range": 0.0,
+      "collapse_threshold": 0.55,
+      "collapse_count": 0,
+      "below_random_count": 0
+    },
+    "sda": {
+      "worst_case_auroc": 0.7190908383531558,
+      "best_case_auroc": 0.7190908383531558,
+      "range": 0.0,
+      "collapse_threshold": 0.55,
+      "collapse_count": 0,
+      "below_random_count": 0
+    },
+    "oracle": {
+      "worst_case_auroc": 0.7794363704787954,
+      "best_case_auroc": 0.7794363704787954,
+      "range": 0.0,
+      "collapse_threshold": 0.55,
+      "collapse_count": 0,
+      "below_random_count": 0
+    }
+  },
+  "rolling_robustness": {
+    "window": 1000,
+    "step": 100,
+    "freeze": {
+      "count": 37,
+      "worst_case_auroc": 0.5380359612724758,
+      "best_case_auroc": 0.9999648983221399,
+      "mean_auroc": 0.7979654070493165,
+      "collapse_count": 2,
+      "below_random_count": 0
+    },
+    "ours": {
+      "count": 37,
+      "worst_case_auroc": 0.4942369755647764,
+      "best_case_auroc": 0.9999648983221398,
+      "mean_auroc": 0.7827091025275885,
+      "collapse_count": 2,
+      "below_random_count": 1
+    },
+    "sda": {
+      "count": 37,
+      "worst_case_auroc": 0.4020285846011987,
+      "best_case_auroc": 0.9999648983221398,
+      "mean_auroc": 0.7123075569345985,
+      "collapse_count": 9,
+      "below_random_count": 8
+    },
+    "oracle": {
+      "count": 37,
+      "worst_case_auroc": 0.4368948824343015,
+      "best_case_auroc": 0.9999648983221399,
+      "mean_auroc": 0.7692377529752921,
+      "collapse_count": 3,
+      "below_random_count": 2
+    }
+  }
+}
