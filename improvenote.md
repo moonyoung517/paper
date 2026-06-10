@@ -43,3 +43,46 @@
 - [ ] sweep 3-seed 실행
 - [ ] 집계 JSON 생성 (mean/std/worst/collapse)
 - [ ] 본문 표/캡션/해석 문구 동기화
+
+## 7) 2-domain 실행 기록 (오늘 수행분)
+
+### 7.1 실행 커맨드 템플릿 (실제 배치 기반)
+- 실행 파일: `scripts/compare_multidomain_baselines.py`
+- 시나리오: `--scenario two_domain` (stream: smd -> msl -> smd)
+- 공통 옵션:
+  - `--data_path ./data --device cpu --max_train_windows 32`
+  - `--collapse_threshold 0.55`
+  - `--oracle_outer_steps 6 --oracle_inner_steps 3 --oracle_max_train_windows 64`
+- 시드: `42, 123, 456`
+- aggressive_A 설정:
+  - `--stride 20 --adapt_buffer 20 --tau_drift 0.85 --max_test_points 4000`
+  - `--outer_steps 2 --inner_steps 1 --rolling_window 800 --rolling_step 100`
+- aggressive_B 설정:
+  - `--stride 10 --adapt_buffer 10 --tau_drift 0.9 --max_test_points 5000`
+  - `--outer_steps 2 --inner_steps 1 --rolling_window 1000 --rolling_step 100`
+
+### 7.2 Freeze / SDA / Ours / Oracle 확인 가능한 결과 (JSON 근거)
+- 근거 파일: `outputs/aggressive_B_seed123.json`
+- 설정 요약:
+  - `scenario=two_domain, use_llm=false, sequence=[smd, msl, smd]`
+  - `seed=123, target_dim=55, num_groups=1`
+  - `oracle_config: reset_each_domain=true, warm_start=false, oracle_inner_steps=3, oracle_outer_steps=6, oracle_max_train_windows=64`
+- Global AUROC:
+  - `freeze: 0.8126488984`
+  - `sda:    0.8070958930`
+  - `ours:   0.8234457286`
+  - `oracle: 0.7609116633`
+- MSL domain AUROC (per_domain):
+  - `freeze: 0.8017423420`
+  - `sda:    0.7190908384`
+  - `ours:   0.8000833415`
+  - `oracle: 0.7794363705`
+- Rolling robustness (window=1000, step=100):
+  - `freeze: worst=0.5380, mean=0.7980, collapse_count=2, below_random_count=0`
+  - `sda:    worst=0.4020, mean=0.7123, collapse_count=9, below_random_count=8`
+  - `ours:   worst=0.4942, mean=0.7827, collapse_count=2, below_random_count=1`
+  - `oracle: worst=0.4369, mean=0.7692, collapse_count=3, below_random_count=2`
+
+### 7.3 추가 집계 결과(오늘 배치 산출)
+- `outputs/seed_agg_results.json`에는 aggressive_A/B에 대해 seed(42/123/456) 기준 rolling collapse/below-random 집계가 저장됨.
+- 이 파일은 Ours/SDA 중심 집계이며, 4-way(global_auroc) per-seed 전체 표는 현재 `outputs/aggressive_B_seed123.json`이 명시적으로 확인 가능함.
