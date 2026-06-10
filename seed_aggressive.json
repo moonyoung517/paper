@@ -1,0 +1,88 @@
+{
+    "metric_source":  "rolling_robustness",
+    "collapse_threshold":  0.55,
+    "summary":  [
+                    {
+                        "config":  "aggressive_A",
+                        "seeds":  [
+                                      42,
+                                      123,
+                                      456
+                                  ],
+                        "ours_collapse_mean":  3,
+                        "ours_collapse_std":  1,
+                        "ours_below_random_mean":  0.66666666666666663,
+                        "ours_below_random_std":  0.57735026918962584,
+                        "sda_collapse_mean":  3,
+                        "sda_collapse_std":  0,
+                        "sda_below_random_mean":  0,
+                        "sda_below_random_std":  0
+                    },
+                    {
+                        "config":  "aggressive_B",
+                        "seeds":  [
+                                      42,
+                                      123,
+                                      456
+                                  ],
+                        "ours_collapse_mean":  2.6666666666666665,
+                        "ours_collapse_std":  0.57735026918962584,
+                        "ours_below_random_mean":  2,
+                        "ours_below_random_std":  1,
+                        "sda_collapse_mean":  5,
+                        "sda_collapse_std":  3,
+                        "sda_below_random_mean":  2.6666666666666665,
+                        "sda_below_random_std":  1.5275252316519468
+                    }
+                ],
+    "raw":  [
+                {
+                    "config":  "aggressive_A",
+                    "seed":  42,
+                    "ours_collapse":  2,
+                    "ours_below_random":  1,
+                    "sda_collapse":  3,
+                    "sda_below_random":  0
+                },
+                {
+                    "config":  "aggressive_A",
+                    "seed":  123,
+                    "ours_collapse":  4,
+                    "ours_below_random":  1,
+                    "sda_collapse":  3,
+                    "sda_below_random":  0
+                },
+                {
+                    "config":  "aggressive_A",
+                    "seed":  456,
+                    "ours_collapse":  3,
+                    "ours_below_random":  0,
+                    "sda_collapse":  3,
+                    "sda_below_random":  0
+                },
+                {
+                    "config":  "aggressive_B",
+                    "seed":  42,
+                    "ours_collapse":  3,
+                    "ours_below_random":  1,
+                    "sda_collapse":  2,
+                    "sda_below_random":  1
+                },
+                {
+                    "config":  "aggressive_B",
+                    "seed":  123,
+                    "ours_collapse":  2,
+                    "ours_below_random":  2,
+                    "sda_collapse":  5,
+                    "sda_below_random":  4
+                },
+                {
+                    "config":  "aggressive_B",
+                    "seed":  456,
+                    "ours_collapse":  3,
+                    "ours_below_random":  3,
+                    "sda_collapse":  8,
+                    "sda_below_random":  3
+                }
+            ]
+}
